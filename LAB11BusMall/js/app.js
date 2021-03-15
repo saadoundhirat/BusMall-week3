@@ -28,18 +28,22 @@ function randomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 // const names = [ 'bag' ,'banana','bathroom','boots','breakfast','bubblegum','chair','cthulhu','dog-duck','dragon','pen','pet-sweep','scissors','shark','sweep','tauntaun','unicorn','usb','water-can','wine-glass'];
+// make golbal variable the holde how many time clecked:
+// let numofclicked = 0 ;// viewed
 
 // GET SECTION ID AND IMAGES ID :
-// let sectionid = document.getElementById('imagesSection');
+let sectionid = document.getElementById('imagesSection');
 let leftimgid = document.getElementById('leftImage');
 let centerimgid = document.getElementById('centerImage');
 let rightimgid = document.getElementById('rightImage');
+let showtheresult =document.getElementById('showtheresult');// this section to show the result
 
 // define constructor :
 function Busmall (name ,extentions){
   this.name =name;
-  this.views =0;
-  this.votes =0;
+  this.titel =name;
+  this.view = 0; // votes
+  this.votes = 0;
   // make path for each image
   this.path =`./assets/${name}.${extentions}`;
   Busmall.all.push(this);
@@ -47,25 +51,11 @@ function Busmall (name ,extentions){
 
 // the static proparity :
 Busmall.all=[]; // HERE WE WILL PUSH EVERY THING WILL GO TO THE CONSTRUCTOR:
-
-// here we want to create an objects from the constructor one object for all items (images) inside the names arr:
-// here we made condition to check on the image path.
-// for (let i =0 ; i<names.length ;i++){
-//   if (names[i] === 'sweep'){
-//     new Busmall (names[i],'png');
-//   } else if (names[i] === 'usb'){
-//     new Busmall (names[i],'gif');
-//   } else {
-//     new Busmall (names[i],'jpg');
-//   }
-// }
+// creat objects
 for (let i =0 ; i<names.length ;i++){
   let object = names[i];
   new Busmall(object[0],object[1]);
 }
-// to log the objects to the console we can use console . table (Busmall.all)
-console.table(Busmall.all);
-
 
 // MAKING THE RENDER FUNCTION :
 function render(){
@@ -75,15 +65,82 @@ function render(){
   let centerrandomimage = Busmall.all[centerpicrandomnum];
   let rightpicrandomnum = randomNumber(0 , Busmall.all.length-1);
   let rightrandomimage = Busmall.all[rightpicrandomnum];
-  console.log(leftpicrandomnum);
-  console.log(leftrandomimage);
-
   // send image src to the image id :
-  leftimgid.src = leftrandomimage.path; // assign the path to the image source 
+  leftimgid.src = leftrandomimage.path; // assign the path to the image source
+  leftimgid.titel=leftrandomimage.titel;
+  leftimgid.alt=leftrandomimage.titel;
+
   centerimgid.src = centerrandomimage.path;
+  centerimgid.titel=centerrandomimage.titel;
+  centerimgid.alt=centerrandomimage.titel;
+
   rightimgid.src = rightrandomimage.path;
-  console.log(leftrandomimage.path);// its give me the name !!!!
+  rightimgid.titel=rightrandomimage.titel;
+  rightimgid.alt=rightrandomimage.titel;
 }
+
+///////////// add event listener for each image :
+sectionid.addEventListener('click', clickeventlistener);
+function clickeventlistener (event){
+  event.preventDefault();
+  if (event.target.id === 'leftimgid' || event.target.id === 'centerimgid' || event.target.id === 'rightimgid'){
+    for (let i=0 ; i<Busmall.all.length ;i++){
+      if (Busmall.all[i].name === event.target.titel){
+        Busmall.all[i].view +=1;
+        Busmall.all[i].votes+=1;
+        console.log(Busmall.all[i]);
+      }
+    }
+  }render();
+}
+
+// function to display the result
+function showimages (){
+  let unorderlist = document.createElement('ul');
+  for (let i=0 ; i<Busmall.all.length ; i++){
+    let listitem = document.createElement('li');
+    listitem.textContent = 'Item name :'+ Busmall.all[i].name +'go number of :' + 'Votes :'+ Busmall.all[i].votes ;
+    unorderlist.appendChild(listitem);
+  }
+  showtheresult.appendChild(unorderlist);
+}
+
+
+
+
 render();
 
+showimages();
+
+
+
+
+
+
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+// const numberofclickedimages=[];
+// /////////////////////////////////////make the event listener :
+// sectionid.addEventListener('click', clickhandler);
+// function clickhandler(event){
+//   numofclicked=numofclicked+1; // to calculate number of clickes :
+//   //event.target.id this one will return the id of the target which is one of the images
+//   if (event.target.id === leftimgid || event.target.id === centerimgid || event.target.id === rightimgid){
+//     for (let i=0 ; i<Busmall.all.length ;i++){
+//       if (Busmall.all[i].name === event.target.titel){
+//         Busmall.all[i].clickedtiemimg++;
+//         Busmall.all[i].numviewstime++;
+//         // numberofclickedimages.push[Busmall.all[i].name];
+//       }
+//     }
+//     render();
+//   }
+//   if (clickhandler === 24){
+//     showimages();
+//   }
+// }
 

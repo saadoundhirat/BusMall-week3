@@ -1,5 +1,5 @@
 body {
-  background: #3768C8;
+  background: #000000;
 }
 header {
   text-align: center;
@@ -24,9 +24,11 @@ header nav ul li a:hover {
   color: #C89737;
 }
 #imagesSection {
-  max-width: 90%;
+  width: 80%;
   margin: 0 auto;
   text-align: center;
+  border:2px red bold;
+  border-radius: 20px;
 }
 img {
   width: 300px;
@@ -35,4 +37,12 @@ img {
   padding: 10px;
   margin: 10px;
   border-radius: 5px;
+}
+#showtheresult {
+  color: red;
+  font-weight: 20px;
+  text-align: center;
+}
+#showtheresult ul {
+  list-style: none;
 }

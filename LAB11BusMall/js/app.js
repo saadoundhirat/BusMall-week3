@@ -77,7 +77,6 @@ function render(){
   leftimgid.src = leftrandomimage.path; // assign the path to the image source
   leftimgid.titel=leftrandomimage.titel;
   leftimgid.alt=leftrandomimage.titel;
-  console.log();
 
   centerimgid.src = centerrandomimage.path;
   centerimgid.titel=centerrandomimage.titel;
@@ -88,7 +87,7 @@ function render(){
   rightimgid.alt=rightrandomimage.titel;
 
 }
-let counter =0;
+let counter = 0;
 ///////////// add event listener for each image :
 leftimgid.addEventListener('click', clickeventlistener);
 centerimgid.addEventListener('click', clickeventlistener);
@@ -112,7 +111,7 @@ function clickeventlistener (event){
       clickonbutton.addEventListener('click',showimagesvotes);
       leftimgid.removeEventListener('click', clickeventlistener);
       centerimgid.removeEventListener('click', clickeventlistener);
-      rightimgid.removeEventListener('click', clickeventlistener)
+      rightimgid.removeEventListener('click', clickeventlistener);
       console.table(Busmall.all);
     }render();
   }

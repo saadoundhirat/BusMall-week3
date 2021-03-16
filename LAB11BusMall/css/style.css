@@ -3,9 +3,14 @@ body {
 }
 header {
   text-align: center;
-  border: 5px solid #C89737;
-  color: #f1f1f1;;
+  border: 3px dotted #f70202;
+  color: #ffffff;;
   margin-bottom: 40px;
+}
+header h1 {
+  font-family: 'Courier New', Courier, monospace;
+  color: #f70202d8;
+  font-size: 35px;
 }
 header nav ul {
   list-style: none;
@@ -16,24 +21,26 @@ header nav ul li {
 }
 header nav ul li a {
   text-decoration: none;
-  color: #f1f1f1;
+  color: #ffffff;
   font-size: 25px;
   font-weight: 100;
+  padding: 20px;
 }
 header nav ul li a:hover {
-  color: #C89737;
+  color: #792005;
 }
 #imagesSection {
   width: 80%;
   margin: 0 auto;
   text-align: center;
-  border:2px red bold;
+  border:2px #f70202 dotted;
   border-radius: 20px;
 }
 img {
   width: 300px;
   height: 300px;
-  border: 10px solid #C89737;
+  border: 10px dotted #f70202;
+  border-radius: 50%;
   padding: 10px;
   margin: 10px;
   border-radius: 5px;

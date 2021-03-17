@@ -54,7 +54,7 @@ for (let i =0 ; i<names.length ;i++){
   let object = names[i];
   new Busmall(object[0],object[1]);
 }
-//////////////////////////////////////////////////////////////////////////////////////////////////
+
 // MAKING THE RENDER FUNCTION :
 function render(){
   const spicialelemetarray =[]; // empty array
@@ -78,6 +78,7 @@ function render(){
   let leftrandomimage = Busmall.all[leftpicrandomnum]; // here is object include all properties
   let centerrandomimage = Busmall.all[centerpicrandomnum];
   let rightrandomimage = Busmall.all[rightpicrandomnum];
+
   leftimgid.src = leftrandomimage.path; // assign the path to the image source
   leftimgid.titel=leftrandomimage.titel;
   leftimgid.alt=leftrandomimage.titel;
@@ -90,7 +91,7 @@ function render(){
   rightimgid.titel=rightrandomimage.titel;
   rightimgid.alt=rightrandomimage.titel;
 
-} // render ends
+}
 let counter = 0;
 ///////////// add event listener for each image :
 leftimgid.addEventListener('click', clickeventlistener);
@@ -98,7 +99,7 @@ centerimgid.addEventListener('click', clickeventlistener);
 rightimgid.addEventListener('click', clickeventlistener);
 
 function clickeventlistener (event){
-  event.preventDefault();
+  // event.preventDefault();
   counter++;
   if (event.target.id === 'leftImage' || event.target.id === 'centerImage' || event.target.id === 'rightImage'){
     for (let i=0 ; i<Busmall.all.length ;i++){

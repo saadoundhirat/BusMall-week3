@@ -62,11 +62,11 @@ function render(){
   let centerpicrandomnum = randomNumber(0 , Busmall.all.length-1);
   let rightpicrandomnum = randomNumber(0 , Busmall.all.length-1);
   // to prevent doublicate in all images.
-  while (leftpicrandomnum === centerpicrandomnum ||leftpicrandomnum === rightpicrandomnum||centerpicrandomnum === rightpicrandomnum||spicialelemetarray.includes(leftpicrandomnum) || spicialelemetarray.includes(centerpicrandomnum) || spicialelemetarray.includes(rightpicrandomnum)) {
+  do {
     leftpicrandomnum = randomNumber(0 , Busmall.all.length-1);
     centerpicrandomnum = randomNumber(0 , Busmall.all.length-1);
     rightpicrandomnum = randomNumber(0 , Busmall.all.length-1);
-  }
+  }while (leftpicrandomnum === centerpicrandomnum ||leftpicrandomnum === rightpicrandomnum||centerpicrandomnum === rightpicrandomnum||spicialelemetarray.includes(leftpicrandomnum) || spicialelemetarray.includes(centerpicrandomnum) || spicialelemetarray.includes(rightpicrandomnum));
   //update the array values after the while loop is stoped.
   spicialelemetarray[0] = leftpicrandomnum;
   spicialelemetarray[1] = centerpicrandomnum;
@@ -110,6 +110,7 @@ function clickeventlistener (event){
       }else if (Busmall.all[i].name === leftimgid.titel || Busmall.all[i].name === centerimgid.titel || Busmall. all[i].name === rightimgid.titel){
         Busmall.all[i].view +=1;
       }
+      localStorage.setItem('Bussmallobject',JSON.stringify(Busmall.all));
     }
     if (counter === 25 ){
       // clickonbutton.style.display='block';
@@ -120,9 +121,20 @@ function clickeventlistener (event){
       displaychart();
       console.table(Busmall.all);
     }render();
+
   }
 }
 render();
+function getitems(){
+
+  let getstrigobj= localStorage.getItem('Bussmallobject');
+  if (getstrigobj){
+    let stringobj = JSON.parse(getstrigobj);
+    Busmall.all=stringobj;
+  }
+  return JSON.parse(getstrigobj);
+}
+getitems();
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //// function to display the result

@@ -57,23 +57,27 @@ for (let i =0 ; i<names.length ;i++){
 
 // MAKING THE RENDER FUNCTION :
 function render(){
+  const spicialelemetarray =[]; // empty array
   let leftpicrandomnum = randomNumber(0 , Busmall.all.length-1); // get random index from busmall.all[]
-  let leftrandomimage = Busmall.all[leftpicrandomnum]; // here is object include all properties
-  //
   let centerpicrandomnum = randomNumber(0 , Busmall.all.length-1);
-  let centerrandomimage = Busmall.all[centerpicrandomnum];
-  //
   let rightpicrandomnum = randomNumber(0 , Busmall.all.length-1);
-  let rightrandomimage = Busmall.all[rightpicrandomnum];
-  // to prevent doublicate
-  if (leftpicrandomnum === centerpicrandomnum || leftpicrandomnum === rightpicrandomnum){
+  // to prevent doublicate in all images.
+  do {
+    leftpicrandomnum = randomNumber(0 , Busmall.all.length-1);
     centerpicrandomnum = randomNumber(0 , Busmall.all.length-1);
-    centerrandomimage = Busmall.all[centerpicrandomnum];
-  } else if (centerpicrandomnum === rightpicrandomnum) {
     rightpicrandomnum = randomNumber(0 , Busmall.all.length-1);
-    rightrandomimage = Busmall.all[rightpicrandomnum];
-  }
+  }while (leftpicrandomnum === centerpicrandomnum ||leftpicrandomnum === rightpicrandomnum||centerpicrandomnum === rightpicrandomnum||spicialelemetarray.includes(leftpicrandomnum) || spicialelemetarray.includes(centerpicrandomnum) || spicialelemetarray.includes(rightpicrandomnum));
+  //update the array values after the while loop is stoped.
+  spicialelemetarray[0] = leftpicrandomnum;
+  spicialelemetarray[1] = centerpicrandomnum;
+  spicialelemetarray[2] = rightpicrandomnum;
+  console.table(spicialelemetarray);
+  // spicialelemetarray.splice(0,spicialelemetarray.length); // this line will empty the array
+  ////////////////////////////////////////////////////////////////////////////////////////
   // send image src to the image id :
+  let leftrandomimage = Busmall.all[leftpicrandomnum]; // here is object include all properties
+  let centerrandomimage = Busmall.all[centerpicrandomnum];
+  let rightrandomimage = Busmall.all[rightpicrandomnum];
 
   leftimgid.src = leftrandomimage.path; // assign the path to the image source
   leftimgid.titel=leftrandomimage.titel;
@@ -106,6 +110,7 @@ function clickeventlistener (event){
       }else if (Busmall.all[i].name === leftimgid.titel || Busmall.all[i].name === centerimgid.titel || Busmall. all[i].name === rightimgid.titel){
         Busmall.all[i].view +=1;
       }
+      localStorage.setItem('Bussmallobject',JSON.stringify(Busmall.all));
     }
     if (counter === 25 ){
       // clickonbutton.style.display='block';
@@ -116,9 +121,20 @@ function clickeventlistener (event){
       displaychart();
       console.table(Busmall.all);
     }render();
+
   }
 }
 render();
+function getitems(){
+
+  let getstrigobj= localStorage.getItem('Bussmallobject');
+  if (getstrigobj){
+    let stringobj = JSON.parse(getstrigobj);
+    Busmall.all=stringobj;
+  }
+  return JSON.parse(getstrigobj);
+}
+getitems();
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //// function to display the result
